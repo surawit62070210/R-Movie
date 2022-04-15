@@ -11,6 +11,6 @@ app.use(cors()); // ให้ app(express) ใช้งานการ cors modu
 
 const MoiveRouter = require('./routes/getmovie')
 app.use(MoiveRouter)
-app.listen(9999, function() {
+app.listen(3000, function() {
     console.log('Server Listen at http://localhost:3000');
 });
