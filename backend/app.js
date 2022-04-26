@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const http = require("http");
+const cookieParser = require('cookie-parser');
 require('dotenv').config()
 
 let app = express();
@@ -13,20 +14,23 @@ app.use(morgan('dev')); // ให้ app(express) ใช้งานการ mo
 app.use(cors()); // ให้ app(express) ใช้งานการ cors module
 
 const userRouter = require('./routes/user-routes');
+const authRouter = require('./routes/auth-routes')
+app.use(cookieParser());
 app.use('/users', userRouter)
+app.use('/auth', authRouter)
 const port = parseInt(process.env.PORT, 10) || 3000
 
 const client = require('./models/DbConfig')
-const query ='INSERT INTO users (user_name, user_email, user_password, user_firstname, user_lastname, user_nickname) VALUES ($1,$2,$3,$4,$5,$6)'
+// const query ='INSERT INTO users (user_name, user_email, user_password, user_firstname, user_lastname, user_nickname) VALUES ($1,$2,$3,$4,$5,$6)'
 
-client.query(query,["user_name", "user_email", "user_password", "user_firstname", "user_lastname", "user_nickname"], (err, res) => {
-  if (err) {
-      console.error(err);
-      return;
-  }
-  console.log('Databaase Connecting');
-  client.end();
-});
+// client.query(query,["user_name", "user_email", "user_password", "user_firstname", "user_lastname", "user_nickname"], (err, res) => {
+//   if (err) {
+//       console.error(err);
+//       return;
+//   }
+//   console.log('Databaase Connecting');
+//   client.end();
+// });
 // client.query(query, ["user_name", "user_email", "user_password", "user_firstname", "user_lastname", "user_nickname"])
 app.set("port", port)
 server.listen(port, function() {
