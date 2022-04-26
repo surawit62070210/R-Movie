@@ -14,10 +14,12 @@ app.use(morgan('dev')); // ให้ app(express) ใช้งานการ mo
 app.use(cors()); // ให้ app(express) ใช้งานการ cors module
 
 const userRouter = require('./routes/user-routes');
-const authRouter = require('./routes/auth-routes')
+const authRouter = require('./routes/auth-routes');
+const dataRouter = require('./routes/data-routes')
 app.use(cookieParser());
 app.use('/users', userRouter)
 app.use('/auth', authRouter)
+app.use('/get', dataRouter)
 const port = parseInt(process.env.PORT, 10) || 3000
 
 const client = require('./models/DbConfig')
