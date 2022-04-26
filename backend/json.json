@@ -306,12 +306,14 @@
             "title": "It's a Wonderful Life",
             "fullTitle": "It's a Wonderful Life (1946)",
             "year": "1946",
-            "image": "https://m.media-amazon.com/images/M/MV5BZjc4NDZhZWMtNGEzYS00ZWU2LThlM2ItNTA0YzQ0OTExMTE2XkEyXkFqcGdeQXVyNjUwMzI2NzU@._V1_UX128_CR0,3,128,176_AL_.jpg",
+            "image1": "https://sv1.picz.in.th/images/2022/04/20/8XiBaR.jpg",
+            "image2 ": "https://sv1.picz.in.th/images/2022/04/20/8Xih40.jpg",
+            "Genre": ["Drama","Family","Fantasy","Romance"],            
             "crew": "Frank Capra (dir.), James Stewart, Donna Reed",
             "imDbRating": "8.6",
             "imDbRatingCount": "442971",
             "tag": "test",
-            "trailer": "https://www.youtube.com/watch?v=WYUmW7E1YI8&list=RDWYUmW7E1YI8&start_radio=1"
+            "trailer": "https://www.youtube.com/watch?v=sFXoAVi4FPk"
         },
         {
             "id": "tt0102926",
