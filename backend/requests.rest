@@ -1,0 +1,52 @@
+### Create a USER 1
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "user_name": "Bob",
+  "user_email" : "bob@email.com",
+  "user_password": "bob",
+  "user_firstname": "nontapat",
+  "user_lastname": "kruprucha",
+  "user_nickname": "kru"
+}
+### Create a USER 2
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+  "name": "Fred",
+  "email" : "fred@email.com",
+  "password": "fred"
+}
+
+###List USERS
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTlkMDdmMTEtZmExMy00Zjg0LThmYzEtMjI3Y2MwYjY5ZmFkIiwidXNlcl9uYW1lIjoiRnJlZCIsInVzZXJfZW1haWwiOiJmcmVkQGVtYWlsLmNvbSIsInRleHQiOiJ0ZXh0IiwiaWF0IjoxNjUwODAwODQzLCJleHAiOjE2NTA4MDA4NjN9.yITXZAnPubE9E5XsNqNN-RtpYW0QZZsybtFnKk-3PNQ
+###
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email":"fred@email.com",
+  "password":"fred"
+}
+####
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email":"bob@email.com",
+  "password":"bob"
+}
+
+###REFRESH TOKENS
+GET http://localhost:5000/api/auth/refresh_token
+
+###
+
+DELETE http://localhost:5000/api/auth/refresh_token
+###
+
+DELETE http://localhost:5000/api/users

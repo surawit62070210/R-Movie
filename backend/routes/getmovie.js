@@ -1,8 +1,7 @@
+
 const express = require("express");
 router = express.Router();
-const data = require('../json.json')
-// const parsedata = JSON.parse(data)
 router.get('/' , async function (req, res, next){
-    res.send(data.items)
+    res.send("sda")
 }) 
 module.exports = router;
