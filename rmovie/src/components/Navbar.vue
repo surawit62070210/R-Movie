@@ -165,10 +165,19 @@ export default {
         axios.post(process.env.VUE_APP_HOST+"auth/login", {email:this.email, password:this.password}).then((res)=>
         {
           this.$cookies.set('refresh_token', res.data.refreshToken)
+          this.$accessToken = res.data.accessToken
           this.email = ''
           this.password = ''
+          alert("ล็อคอินสำเร็จ")
         },
         )
+        axios.get(process.env.VUE_APP_HOST+'users', {
+        headers: {
+           'Authorization': `Bearer ${this.$accessToken}`
+          }}
+        ).then((res)=>{
+          console.log(res.data)
+        }).catch(error => {console.log(error)})
       }
     }
   };

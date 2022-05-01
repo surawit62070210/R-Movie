@@ -32,7 +32,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get(`http://localhost:3000/`);
+      const res = await axios.get(process.env.VUE_APP_HOST +'get');
 
       this.movies = res.data;
     } catch (e) {
