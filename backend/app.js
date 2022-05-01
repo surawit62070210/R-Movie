@@ -1,4 +1,5 @@
 const express = require('express');
+const {json} = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -22,7 +23,7 @@ app.use('/auth', authRouter)
 app.use('/get', dataRouter)
 const port = parseInt(process.env.PORT, 10) || 3000
 
-const client = require('./models/DbConfig')
+app.use(json());
 // const query ='INSERT INTO users (user_name, user_email, user_password, user_firstname, user_lastname, user_nickname) VALUES ($1,$2,$3,$4,$5,$6)'
 
 // client.query(query,["user_name", "user_email", "user_password", "user_firstname", "user_lastname", "user_nickname"], (err, res) => {

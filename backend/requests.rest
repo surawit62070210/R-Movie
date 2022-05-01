@@ -4,11 +4,11 @@ Content-Type: application/json
 
 {
   "user_name": "Bob",
-  "user_email" : "bob@email.com",
+  "user_email" : "bob@dsdsdewsadsdsdsadsdsdsemreail.com",
   "user_password": "bob",
+  "user_mobile": "0953263665",
   "user_firstname": "nontapat",
-  "user_lastname": "kruprucha",
-  "user_nickname": "kru"
+  "user_lastname": "kruprucha"
 }
 ### Create a USER 2
 POST http://localhost:3000/users
@@ -37,12 +37,12 @@ Content-Type: application/json
   "password":"fred"
 }
 ####
-POST http://localhost:5000/api/auth/login
+POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email":"bob@email.com",
-  "password":"bob"
+  "email":"flukgoza@gmail.com",
+  "password":"1234"
 }
 
 ###REFRESH TOKENS

@@ -14,7 +14,7 @@ router.post('/login', async (req, res)=>{
         const validPassword = await bcrypt.compare(password, users.rows[0].user_password)
         if(!validPassword) res.status(401).json({error: "password is incorrect"})
         let tokens = jwtTokens(users.rows[0].user_email, users.rows[0].user_password);
-        res.cookie('refresh_token', tokens.refreshToken, {...(process.env.COOKIE_DOMAIN && {domain: process.env.COOKIE_DOMAIN}), httpOnly: true,sameSite: 'none', secure: true});
+        res.cookie('refresh_token', tokens.refreshToken);
 
         res.json(tokens);
     } catch(error){
@@ -29,13 +29,14 @@ router.delete('/refresh_token', (req, res) => {
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
           if (error) return res.status(403).json({error:error.message});
           let tokens = jwtTokens(user);
-          res.cookie('refresh_token', tokens.refreshToken, {...(process.env.COOKIE_DOMAIN && {domain: process.env.COOKIE_DOMAIN}) , httpOnly: true,sameSite: 'none', secure: true});
+          res.cookie('refresh_token', tokens.refreshToken);
           return res.json(tokens);
         });
     }catch(error){
         res.json(401).json({error: error.message})
     }
 })
+
 
 
 module.exports = router;

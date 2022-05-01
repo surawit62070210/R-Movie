@@ -45,13 +45,13 @@
         <form>
           <div class="mb-3 justify-content-end">
             <label class="col-form-label d-flex" for="defaultForm-email" >Email</label>
-            <input type="email" id="defaultForm-email" class="form-control validate" placeholder="Your email...">
+            <input type="email" id="defaultForm-email" class="form-control validate" v-model="email" placeholder="Your email...">
           </div>
           <div class="mb-3">
             <label class="col-form-label d-flex" for="defaultForm-pass">Password</label>
-            <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Your password...">
+            <input type="password" id="defaultForm-pass" class="form-control validate" v-model="password" placeholder="Your password...">
           </div>
-          <button type="button" class="mb-1 mt-3 btn btn-warning" style="color: white; width: 100%">Login</button>
+          <button type="button" class="mb-1 mt-3 btn btn-warning" style="color: white; width: 100%" @click="login()">Login</button>
         </form>
       </div>
       <div class="modal-footer justify-content-center">
@@ -62,11 +62,11 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="margin-right: 20px">
+<button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signup" style="margin-right: 20px">
   Sign Up
 </button>
 
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" ref="signup" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog" style="max-width: 450px">
     <div class="modal-content">
       <div class="modal-header">
@@ -123,6 +123,7 @@
 <script>
 import $ from 'jquery'
 import axios from 'axios'
+
 export default {
     components: { DatePicker },
     data() {
@@ -146,11 +147,28 @@ export default {
           user_lastname: this.last_name,
           user_birthday: this.date
         }).then((res) => {
-          console.log(res)
+          this.$accessToken = res.data.accessToken
+          alert("สมัครสมาชิกสำเร็จ")
+          this.username = ''
+          this.email = ''
+          this.password = ''
+          this.mobile = ''
+          this.first_name = ''
+          this.last_name = ''
+          this.date = ''
         })
         .catch((error) => {
           console.log(error.response.data)
         })
+      },
+      login(){
+        axios.post(process.env.VUE_APP_HOST+"auth/login", {email:this.email, password:this.password}).then((res)=>
+        {
+          this.$cookies.set('refresh_token', res.data.refreshToken)
+          this.email = ''
+          this.password = ''
+        },
+        )
       }
     }
   };
