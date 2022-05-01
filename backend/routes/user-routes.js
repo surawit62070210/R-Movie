@@ -2,13 +2,13 @@
 const express = require("express");
 const client = require("../models/DbConfig")
 const bcrypt = require('bcrypt');
-const jwtTokens =  '../utils/jwt-helpers.js';
+const { jwtTokens } =  '../utils/jwt-helpers.js';
 const { authenticateToken } = require('../middleware/authorization')
 router = express.Router();
 
 let refreshTokens = [];
 
-router.get('/',authenticateToken, async (req, res) =>{
+router.get('/', authenticateToken, async (req, res) =>{
     try {
         console.log(req);
         const users = await client.query('select * from users')
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
         // console.log([req.body.user_name, req.body.user_email, hashPassword, req.body.user_firstname, req.body.user_lastname, req.body.user_nickname])
         const newUser = await client.query(
             'INSERT INTO users (user_name, user_email, user_password,user_mobile, user_firstname, user_lastname, user_birthday) VALUES ($1,$2,$3,$4,$5,$6, $7) RETURNING *'
-            , [req.body.user_name, req.body.user_email, hashPassword, user_mobile, req.body.user_firstname, req.body.user_lastname, req.body.user_birthday]
+            , [req.body.user_name, req.body.user_email, hashPassword, req.body.user_mobile, req.body.user_firstname, req.body.user_lastname, req.body.user_birthday]
         );
         res.json(jwtTokens(newUser.rows[0].user_email, newUser.rows[0].user_password));
     }catch(error){

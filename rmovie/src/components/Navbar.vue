@@ -77,32 +77,31 @@
         <form>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-firstname" >Firstname</label>
-            <input type="text" id="defaultForm-firstname" class="form-control validate" v-model="$v.first_name.$model" placeholder="Your Firstname...">
+            <input type="text" id="defaultForm-firstname" class="form-control validate" v-model="first_name" placeholder="Your Firstname...">
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-lastname" >Lastname</label>
-            <input type="text" id="defaultForm-lastname" class="form-control validate" v-model="$v.last_name.$model" placeholder="Your Lastname...">
+            <input type="text" id="defaultForm-lastname" class="form-control validate" v-model="last_name" placeholder="Your Lastname...">
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-nickname" >Username</label>
-            <input type="text" id="defaultForm-nickname" class="form-control validate" v-model="$v.username.$model" placeholder="Your Lastname...">
+            <input type="text" id="defaultForm-nickname" class="form-control validate" v-model="username" placeholder="Your Lastname...">
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-email" >Email</label>
-            <input type="email" id="defaultForm-email" class="form-control validate" v-model="$v.email.$model" placeholder="Your email...">
+            <input type="email" id="defaultForm-email" class="form-control validate" v-model="email" placeholder="Your email...">
+          </div>
+            <div class="mb-2">
+            <label class="col-form-label d-flex" for="defaultForm-email" >Mobile</label>
+            <input type="mobile" id="defaultForm-email" class="form-control validate" v-model="mobile" placeholder="Your mobile...">
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-pass">Password</label>
-            <input type="text" id="defaultForm-pass" class="form-control validate" v-model="$v.password.$model" placeholder="Your password...">
+            <input type="text" id="defaultForm-pass" class="form-control validate" v-model="password" placeholder="Your password...">
           </div>
-                    <div class="mb-2">
-            <label class="col-form-label d-flex" for="defaultForm-pass">Repeat Password</label>
-            <input type="text" id="defaultForm-pass" class="form-control validate" v-model="$v.confirm_password.$model" placeholder="Your password...">
-          </div>
-          
           <div class="mb-2">
           <label class="col-form-label d-flex" for="defaultForm-date">Birthday</label>
-          <date-picker v-model="date" valueType="date" id="defaultForm-date" style="width: 100%"  placeholder="Select date..."></date-picker>
+          <date-picker v-model="date" valueType="date" id="defaultForm-date" style="width: 100%" placeholder="Select date..."></date-picker>
           </div>
           <button type="button" class="mb-1 mt-3 btn btn-warning" style="color: white; width: 100%" @click="submit()">Sign up</button>
         </form>
@@ -123,89 +122,36 @@
 
 <script>
 import $ from 'jquery'
-import { required, email, minLength, sameAs, maxLength } from "vuelidate/lib/validators";
-function mobile(value) {
-  return !!value.match(/0[0-9]{9}/);
-}
-function complexPassword(value) {
-  if (!(value.match(/[a-z]/) && value.match(/[A-Z]/) && value.match(/[0-9]/))) {
-    return false;
-  }
-  return true;
-}
-
+import axios from 'axios'
 export default {
     components: { DatePicker },
     data() {
       return {
         date: null,
-        first_name:"",
-        last_name:"",
         username:"",
         email:"",
+        first_name:"",
+        last_name:"",
         password:"",
-        confirm_password:"",
+        mobile:""        
       };
-    },validations: {
-    email: {
-      required: required,
-      email
-    },
-    mobile: {
-      required: required,
-      mobile: mobile
-    },
-    username: {
-      required: required,
-      maxLength: minLength(5),
-      minLength:maxLength(20)
-    },
-    first_name:{
-      required:required,
-      maxLength:maxLength(150)
-    },
-    last_name:{
-      required:required,
-      maxLength:maxLength(150)
-    },
-
-    password: {
-      required: required,
-      minLength: minLength(8),
-      complex: complexPassword
-    },
-    confirm_password: {
-      sameAs: sameAs("password")
-    }
-  },
-    methods:{
-     submit() {
-       // Validate all fields
-       this.$v.$touch();
-
-       // เช็คว่าในฟอร์มไม่มี error
-       if (!this.$v.$invalid) {
-         let data = {
-           user_username: this.username,
-           user_password: this.password,
-           user_email: this.email,
-           user_mobile: this.mobile,
-           user_first_name: this.first_name,
-           user_last_name: this.last_name,
-           user_birthday: this.date
-         }
-
-         axios
-           .post("http://localhost:3000/user/signup", data)
-           .then((res) => {
-             alert("Sign up Success");
-           })
-            
-           .catch((err) => {
-             alert(err.response.data.details.message)
-           })
-       }
-     }
+    },methods:{
+      submit(){
+        axios.post(process.env.VUE_APP_HOST+"users", {
+          user_name: this.username,
+          user_email: this.email,
+          user_password: this.password,
+          user_mobile: this.mobile,
+          user_firstname: this.first_name,
+          user_lastname: this.last_name,
+          user_birthday: this.date
+        }).then((res) => {
+          console.log(res)
+        })
+        .catch((error) => {
+          console.log(error.response.data)
+        })
+      }
     }
   };
 import DatePicker from 'vue2-datepicker';
