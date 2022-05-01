@@ -104,7 +104,7 @@
           <label class="col-form-label d-flex" for="defaultForm-date">Birthday</label>
           <date-picker v-model="date" valueType="date" id="defaultForm-date" style="width: 100%"  placeholder="Select date..."></date-picker>
           </div>
-          <button type="button" class="mb-1 mt-3 btn btn-warning" style="color: white; width: 100%">Sign up</button>
+          <button type="button" class="mb-1 mt-3 btn btn-warning" style="color: white; width: 100%" @click="submit()">Sign up</button>
         </form>
       </div>
       <div class="modal-footer justify-content-center">
@@ -186,14 +186,13 @@ export default {
        // เช็คว่าในฟอร์มไม่มี error
        if (!this.$v.$invalid) {
          let data = {
-           username: this.username,
-           password: this.password,
-           confirm_password: this.confirm_password,
-           email: this.email,
-           mobile: this.mobile,
-           first_name: this.first_name,
-           last_name: this.last_name,
-           birth_day: this.date
+           user_username: this.username,
+           user_password: this.password,
+           user_email: this.email,
+           user_mobile: this.mobile,
+           user_first_name: this.first_name,
+           user_last_name: this.last_name,
+           user_birthday: this.date
          }
 
          axios

@@ -4,6 +4,7 @@ CREATE TABLE users(
   user_name TEXT NOT NULL,
   user_email TEXT NOT NULL UNIQUE,
   user_password TEXT NOT NULL,
+  user_mobile TEXT NOT NULL,
   user_birthday DATE,
   created_on timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
