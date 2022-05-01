@@ -11,21 +11,25 @@ Content-Type: application/json
   "user_nickname": "kru"
 }
 ### Create a USER 2
-POST http://localhost:5000/api/users
+POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "name": "Fred",
-  "email" : "fred@email.com",
-  "password": "fred"
+  "user_name": "Fred",
+  "user_email" : "fred@email.com",
+  "user_password": "fred",
+  "user_firstname": "nontapat",
+  "user_lastname": "kruprucha",
+  "user_nickname": "kru"
+
 }
 
 ###List USERS
 GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTlkMDdmMTEtZmExMy00Zjg0LThmYzEtMjI3Y2MwYjY5ZmFkIiwidXNlcl9uYW1lIjoiRnJlZCIsInVzZXJfZW1haWwiOiJmcmVkQGVtYWlsLmNvbSIsInRleHQiOiJ0ZXh0IiwiaWF0IjoxNjUwODAwODQzLCJleHAiOjE2NTA4MDA4NjN9.yITXZAnPubE9E5XsNqNN-RtpYW0QZZsybtFnKk-3PNQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTA5NjQ2NzEsImV4cCI6MTY1MDk2NDk3MX0.ReHWmNujhmg_zzZfp-aO-ZZSYvv_RZ68O8mdbdnmeIM
 ###
 
-POST http://localhost:5000/api/auth/login
+POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
@@ -46,7 +50,13 @@ GET http://localhost:5000/api/auth/refresh_token
 
 ###
 
-DELETE http://localhost:5000/api/auth/refresh_token
+DELETE http://localhost:3000/auth/refresh_token
 ###
 
-DELETE http://localhost:5000/api/users
+DELETE http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "user_email" : "bob@email.com"
+}
+###
