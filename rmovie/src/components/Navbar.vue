@@ -56,11 +56,15 @@
       </div>
       <div class="modal-footer justify-content-center">
         
-        <div class="signup-section">Not a member yet? <a href="#signup" class="text-info" data-bs-toggle="modal" data-bs-target="#signup">Sign Up</a>.</div>
+        <div class="signup-section">Not a member yet? <a href="#exampleModal" class="text-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign Up</a>.</div>
       </div>
     </div>
   </div>
 </div>
+
+<button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signup" style="margin-right: 20px">
+  Sign Up
+</button>
 
 <div class="modal fade" ref="signup" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog" style="max-width: 450px">
@@ -80,16 +84,16 @@
             <input type="text" id="defaultForm-lastname" class="form-control validate" v-model="last_name" placeholder="Your Lastname...">
           </div>
           <div class="mb-2">
-            <label class="col-form-label d-flex" for="defaultForm-username" >Username</label>
-            <input type="text" id="defaultForm-username" class="form-control validate" v-model="username" placeholder="Your username...">
+            <label class="col-form-label d-flex" for="defaultForm-nickname" >Username</label>
+            <input type="text" id="defaultForm-nickname" class="form-control validate" v-model="username" placeholder="Your Lastname...">
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-email" >Email</label>
             <input type="email" id="defaultForm-email" class="form-control validate" v-model="email" placeholder="Your email...">
           </div>
             <div class="mb-2">
-            <label class="col-form-label d-flex" for="defaultForm-mobile" >Mobile</label>
-            <input type="mobile" id="defaultForm-mobile" class="form-control validate" v-model="mobile" placeholder="Your mobile...">
+            <label class="col-form-label d-flex" for="defaultForm-email" >Mobile</label>
+            <input type="mobile" id="defaultForm-email" class="form-control validate" v-model="mobile" placeholder="Your mobile...">
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-pass">Password</label>
@@ -145,7 +149,7 @@ export default {
           user_birthday: this.date
         }).then((res) => {
           this.$accessToken = res.data.accessToken
-          alert("Register successful")
+          alert("สมัครสมาชิกสำเร็จ")
           this.username = ''
           this.email = ''
           this.password = ''
@@ -164,8 +168,9 @@ export default {
           this.$cookies.set('refresh_token', res.data.refreshToken)
           this.$accessToken = res.data.accessToken
           this.email = ''
-          this.password = ''
-          alert("Login successful")
+          this.password = '' 
+          console.log(res.data)
+          alert("ล็อคอินสำเร็จ")
         },
         )
         // axios.get(process.env.VUE_APP_HOST+'users', {
