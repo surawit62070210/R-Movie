@@ -30,11 +30,11 @@
   </form>
   </nav>
   
-  <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right: 20px">
+  <button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-right: 20px">
   Login
 </button>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="max-width: 350px">
     <div class="modal-content">
       <div class="modal-header">
@@ -62,7 +62,7 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signup" style="margin-right: 20px">
+<button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signup" style="margin-right: 20px">
   Sign Up
 </button>
 
@@ -123,7 +123,7 @@
 <script>
 import $ from 'jquery'
 import axios from 'axios'
-
+import {jwtDecode} from "./jwt-decode.js";
 export default {
     components: { DatePicker },
     data() {
@@ -134,7 +134,8 @@ export default {
         first_name:"",
         last_name:"",
         password:"",
-        mobile:""        
+        mobile:"",
+        auth:false       
       };
     },methods:{
       submit(){
@@ -167,19 +168,30 @@ export default {
           this.$cookies.set('refresh_token', res.data.refreshToken)
           this.$accessToken = res.data.accessToken
           this.email = ''
-          this.password = ''
+          this.password = '' 
+          console.log(res.data)
           alert("ล็อคอินสำเร็จ")
         },
         )
-        axios.get(process.env.VUE_APP_HOST+'users', {
-        headers: {
-           'Authorization': `Bearer ${this.$accessToken}`
-          }}
-        ).then((res)=>{
-          console.log(res.data)
-        }).catch(error => {console.log(error)})
+        // axios.get(process.env.VUE_APP_HOST+'users', {
+        // headers: {
+        //    'Authorization': `Bearer ${this.$accessToken}`
+        //   }}
+        // ).then((res)=>{
+        //   console.log(res.data)
+        // }).catch(error => {console.log(error)})
+        // }
+        
+        // axios.get(process.env.VUE_APP_HOST+"auth/refresh_token", {
+        //   headers: {
+        //    'Authorization': `Bearer ${this.$cookies.get('refresh_token')}`
+        //   }}
+        // ).then((res)=>{console.log(res)}).catch(error =>{console.log(error)})
       }
     }
+    // ,mounted:{
+
+    // }
   };
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';

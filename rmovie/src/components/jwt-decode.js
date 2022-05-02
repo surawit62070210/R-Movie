@@ -37,7 +37,7 @@ export function jwtDecode(token, options) {
   options = options || {};
   var pos = options.header === true ? 0 : 1;
   try {
-    return JSON.parse(base64_url_decode(token.split(".")[pos]));
+    return JSON.parse(base64_url_decode(token.split(".")[0]));
   } catch (e) {
     console.log(e.message);
   }

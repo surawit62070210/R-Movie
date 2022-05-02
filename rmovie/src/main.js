@@ -11,6 +11,10 @@ Vue.use(VueCookies, { expire: '7d'})
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
+
+
+
+
 new Vue({
   router,
   render: h => h(App),
