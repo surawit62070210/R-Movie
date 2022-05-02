@@ -73,31 +73,46 @@
         <form>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-firstname" >Firstname</label>
-            <input type="text" id="defaultForm-firstname" class="form-control validate" v-model="first_name" placeholder="Your Firstname...">
+            <input type="text" id="firstname" name="firstname" class="form-control" v-validate="'required'" v-model="first_name" placeholder="Your Firstname...">
+            <span v-show="errors.has('firstname')" class="text-danger d-flex">{{ errors.first('firstname') }}</span>
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-lastname" >Lastname</label>
-            <input type="text" id="defaultForm-lastname" class="form-control validate" v-model="last_name" placeholder="Your Lastname...">
+            <input type="text" id="lastname" name="lastname" class="form-control" v-validate="'required'" v-model="last_name" placeholder="Your Lastname...">
+            <span v-show="errors.has('lastname')" class="text-danger d-flex">{{ errors.first('lastname') }}</span>
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-username" >Username</label>
-            <input type="text" id="defaultForm-username" class="form-control validate" v-model="username" placeholder="Your username...">
+            <input type="text" id="username" name="username" class="form-control"  v-validate="'required'" v-model="username" placeholder="Your username...">
+            <span v-show="errors.has('username')" class="text-danger d-flex">{{ errors.first('username') }}</span>
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-email" >Email</label>
-            <input type="email" id="defaultForm-email" class="form-control validate" v-model="email" placeholder="Your email...">
+            <input id="email" name="email" v-validate="'required|email'" type="text" class="form-control" v-model="email" placeholder="Your email...">
+            <span v-show="errors.has('email')" class="text-danger d-flex">
+            {{ errors.first('email') }}
+            </span>
           </div>
             <div class="mb-2">
-            <label class="col-form-label d-flex" for="defaultForm-mobile" >Mobile</label>
-            <input type="mobile" id="defaultForm-mobile" class="form-control validate" v-model="mobile" placeholder="Your mobile...">
+            <label class="col-form-label d-flex" for="defaultForm-mobile" >Phone</label>
+            <input type="text" id="phone" name="phone" v-validate="'required'"  class="form-control" v-model="mobile" placeholder="Your mobile...">
+            <span v-show="errors.has('phone')" class="text-danger d-flex">
+              {{ errors.first('phone') }}
+            </span>
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-pass">Password</label>
-            <input type="text" id="defaultForm-pass" class="form-control validate" v-model="password" placeholder="Your password...">
+            <input id="password" name="password" v-validate="'required'" type="password" class="form-control" v-model="password" placeholder="Your password...">
+            <span v-show="errors.has('password')" class="text-danger d-flex">
+        {{ errors.first('password') }}
+      </span>
           </div>
           <div class="mb-2">
           <label class="col-form-label d-flex" for="defaultForm-date">Birthday</label>
-          <date-picker v-model="date" valueType="date" id="defaultForm-date" style="width: 100%" placeholder="Select date..."></date-picker>
+          <date-picker v-model="date" valueType="date" id="date" name="date" v-validate="'required'" style="width: 100%" placeholder="Select date..."></date-picker>
+          <span v-show="errors.has('date')" class="text-danger d-flex">
+        {{ errors.first('date') }}
+      </span>
           </div>
           <button type="button" class="mb-1 mt-3 btn btn-warning" style="color: white; width: 100%" @click="submit()">Sign up</button>
         </form>
@@ -134,6 +149,9 @@ export default {
       };
     },methods:{
       submit(){
+        this.$validator.validateAll().then((result) => {
+        if (result) {
+        alert("Register successful")
         axios.post(process.env.VUE_APP_HOST+"users", {
           user_name: this.username,
           user_email: this.email,
@@ -144,7 +162,6 @@ export default {
           user_birthday: this.date
         }).then((res) => {
           this.$accessToken = res.data.accessToken
-          alert("Register successful")
           this.username = ''
           this.email = ''
           this.password = ''
@@ -155,8 +172,12 @@ export default {
         })
         .catch((error) => {
           console.log(error.response.data)
-        })
-      },
+        })}
+        else {
+        alert("Failed to register")
+        }
+      })},
+
       login(){
         axios.post(process.env.VUE_APP_HOST+"auth/login", {email:this.email, password:this.password}).then((res)=>
         {
