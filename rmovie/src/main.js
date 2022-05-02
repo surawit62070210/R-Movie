@@ -11,6 +11,11 @@ Vue.use(VueCookies, { expire: '7d'})
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
+
+
+import VueCarousel from 'vue-carousel';
+Vue.use(VueCarousel);
+
 new Vue({
   router,
   render: h => h(App),

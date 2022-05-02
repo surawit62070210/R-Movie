@@ -1,11 +1,15 @@
 <template>
 <body>
-  <div class="container">
+  <div class="container"> 
+    
     <div class="row">
-      <div
-        class="col-lg-3 col-md-3 col-sm-3 col-xs-12" v-for="(movie, index) in movies"
+     <carousel v-bind:per-page-custom=[[780,5]]>
+      <slide>
+        <div
+        class="col" v-for="(movie, index) in movies.slice(0,10)"
         :key="index" 
       >
+       
         <div class="card" style="width: 15rem">
           <img class="card-img-top" :src="movie.image1" alt="Card image cap" style="max-height: 300px" />
           <div class="card-body">
@@ -13,11 +17,11 @@
             <a href="/random" class="btn btn-warning" style="color: white">Watch</a>
           </div>
         </div>
+        
       </div>
+      </slide>
+      </carousel>
     </div>
-
-    
-
   </div>
   </body>
 </template>
@@ -46,6 +50,6 @@ export default {
 <style scoped>
 body {
   width: 100%;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
 }
 </style>

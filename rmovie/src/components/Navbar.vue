@@ -56,7 +56,7 @@
       </div>
       <div class="modal-footer justify-content-center">
         
-        <div class="signup-section">Not a member yet? <a href="#exampleModal" class="text-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign Up</a>.</div>
+        <div class="signup-section">Not a member yet? <a href="#signup" class="text-info" data-bs-toggle="modal" data-bs-target="#signup">Sign Up</a>.</div>
       </div>
     </div>
   </div>
@@ -84,16 +84,16 @@
             <input type="text" id="defaultForm-lastname" class="form-control validate" v-model="last_name" placeholder="Your Lastname...">
           </div>
           <div class="mb-2">
-            <label class="col-form-label d-flex" for="defaultForm-nickname" >Username</label>
-            <input type="text" id="defaultForm-nickname" class="form-control validate" v-model="username" placeholder="Your Lastname...">
+            <label class="col-form-label d-flex" for="defaultForm-username" >Username</label>
+            <input type="text" id="defaultForm-username" class="form-control validate" v-model="username" placeholder="Your username...">
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-email" >Email</label>
             <input type="email" id="defaultForm-email" class="form-control validate" v-model="email" placeholder="Your email...">
           </div>
             <div class="mb-2">
-            <label class="col-form-label d-flex" for="defaultForm-email" >Mobile</label>
-            <input type="mobile" id="defaultForm-email" class="form-control validate" v-model="mobile" placeholder="Your mobile...">
+            <label class="col-form-label d-flex" for="defaultForm-mobile" >Mobile</label>
+            <input type="mobile" id="defaultForm-mobile" class="form-control validate" v-model="mobile" placeholder="Your mobile...">
           </div>
           <div class="mb-2">
             <label class="col-form-label d-flex" for="defaultForm-pass">Password</label>
@@ -148,7 +148,7 @@ export default {
           user_birthday: this.date
         }).then((res) => {
           this.$accessToken = res.data.accessToken
-          alert("สมัครสมาชิกสำเร็จ")
+          alert("Register successful")
           this.username = ''
           this.email = ''
           this.password = ''
@@ -168,7 +168,7 @@ export default {
           this.$accessToken = res.data.accessToken
           this.email = ''
           this.password = ''
-          alert("ล็อคอินสำเร็จ")
+          alert("Login successful")
         },
         )
         axios.get(process.env.VUE_APP_HOST+'users', {
