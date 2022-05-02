@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
             , [req.body.user_name, req.body.user_email, hashPassword, req.body.user_mobile, req.body.user_firstname, req.body.user_lastname, req.body.user_birthday]
         );
         
-        res.json(jwtTokens(newUser.rows[0].user_email, newUser.rows[0].user_password));
+        res.json(jwtTokens(newUser.rows[0].user_email, newUser.rows[0].user_password,newUser.rows[0].user_name));
     }catch(error){
         res.status(500).json({error: error.message})
     }
