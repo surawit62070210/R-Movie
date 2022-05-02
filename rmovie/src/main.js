@@ -11,7 +11,8 @@ Vue.use(VueCookies, { expire: '7d'})
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
-
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
 
 import VueCarousel from 'vue-carousel';
 Vue.use(VueCarousel);

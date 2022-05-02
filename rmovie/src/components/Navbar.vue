@@ -62,10 +62,6 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signup" style="margin-right: 20px">
-  Sign Up
-</button>
-
 <div class="modal fade" ref="signup" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog" style="max-width: 450px">
     <div class="modal-content">

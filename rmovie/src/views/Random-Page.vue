@@ -10,19 +10,19 @@
     Slide 2 Content
   </slide>
   <slide>
-    Slide 2 Content
+    Slide 3 Content
   </slide>
   <slide>
-    Slide 2 Content
+    Slide 4 Content
   </slide>
   <slide>
-    Slide 2 Content
+    Slide 5 Content
   </slide>
   <slide>
-    Slide 2 Content
+    Slide 6 Content
   </slide>
   <slide>
-    Slide 2 Content
+    Slide 7 Content
   </slide>
 </carousel>
 

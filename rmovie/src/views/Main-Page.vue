@@ -3,13 +3,13 @@
   <div class="container"> 
     
     <div class="row">
-     <carousel v-bind:per-page-custom=[[780,5]]>
-      <slide>
+     <!-- <carousel v-bind:per-page-custom=[[780,5]]> -->
+      
         <div
-        class="col" v-for="(movie, index) in movies.slice(0,10)"
+        class="col" v-for="(movie, index) in movies.slice(0,15)"
         :key="index" 
       >
-       
+       <!-- <slide> -->
         <div class="card" style="width: 15rem">
           <img class="card-img-top" :src="movie.image1" alt="Card image cap" style="max-height: 300px" />
           <div class="card-body">
@@ -17,10 +17,11 @@
             <a href="/random" class="btn btn-warning" style="color: white">Watch</a>
           </div>
         </div>
-        
+       <!-- </slide>  -->
       </div>
-      </slide>
-      </carousel>
+      
+      
+      <!-- </carousel> -->
     </div>
   </div>
   </body>
