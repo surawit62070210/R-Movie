@@ -12,7 +12,7 @@ router.post('/create', async (req, res)=>{
     const on_commit = req.body
     console.log(on_commit)
     try{ 
-    const create_comment = await client.query(`insert into comments (movie_id, comment_by_email, comment) values ($1,$2,$3)`,[on_commit.movieId, on_commit.comment_by_email, on_commit.comment])
+    await client.query(`insert into comments (movie_id, comment_by_email, comment) values ($1,$2,$3)`,[on_commit.movieId, on_commit.comment_by_email, on_commit.comment])
     res.status(200).send('ok')
     }catch(error){
         res.status(500).json(error)

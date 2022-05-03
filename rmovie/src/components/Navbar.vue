@@ -256,6 +256,7 @@ export default {
           this.last_name = "";
           this.date = "";
           this.repassword = '';
+          this.auth =true
         })
         .catch((error) => {
           alert(error.response.data.error);
@@ -324,12 +325,14 @@ export default {
     logout() {
       this.auth = false;
       this.$accessToken = "";
+      
       this.$cookies.remove("refresh_token");
     },
 
   },
   created() {
     this.checkLogin();
+    console.log('nav')
   },
 };
 import DatePicker from "vue2-datepicker";

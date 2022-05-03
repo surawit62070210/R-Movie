@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
             'INSERT INTO users (user_name, user_email, user_password,user_mobile, user_firstname, user_lastname, user_birthday) VALUES ($1,$2,$3,$4,$5,$6, $7) RETURNING *'
             , [req.body.user_name, req.body.user_email, hashPassword, req.body.user_mobile, req.body.user_firstname, req.body.user_lastname, req.body.user_birthday]
         );
-        const jwt = jwtTokens(newUser.rows[0].user_email, newUser.rows[0].user_password,newUser.rows[0].user_name)
+        const jwt = jwtTokens(newUser.rows[0].user_email, newUser.rows[0].user_password, newUser.rows[0].user_name, newUser.rows[0].user_firstname, newUser.rows[0].user_lastname, newUser.rows[0].user_mobile, newUser.rows[0].user_birthday)
         res.json(jwt);
     }catch(error){
         res.status(500).json({error: error.message})

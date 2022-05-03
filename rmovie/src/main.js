@@ -6,11 +6,14 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap'; import 'bootstrap/dist/css/bootstrap.min.css';
 import VueCookies from 'vue-cookies'
-Vue.prototype.$accessToken ="test"
+import cors from "cors"
 Vue.use(VueCookies, { expire: '15m'})
+Vue.prototype.$users = '' 
+Vue.prototype.$accessToken =""
+
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
-
+Vue.use(cors)
 
 
 import VueCarousel from 'vue-carousel';
