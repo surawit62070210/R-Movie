@@ -325,7 +325,6 @@ export default {
     logout() {
       this.auth = false;
       this.$accessToken = "";
-      
       this.$cookies.remove("refresh_token");
     },
 

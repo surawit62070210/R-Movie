@@ -39,7 +39,7 @@
                     <p>{{ blog.crew }}</p>
                     <p>{{ blog.storyline }}</p>
                     <h5>User Comment</h5>
-                    <b-input-group :prepend="this.$users.user_name" class="mt-3">
+                    <b-input-group :prepend="this.$users.user_name " class="mt-3">
                       <b-form-input v-model="comment"></b-form-input>
                       <b-input-group-append > 
                         <b-button @click="addComment()" variant="outline-success">Comment</b-button>
@@ -105,7 +105,6 @@ export default {
     } catch (e) {
       console.error(e);
     }
-    this.$users = jwtDecode(this.$cookies.get('refresh_token'));
 },
   methods: {
     getAvata(name){

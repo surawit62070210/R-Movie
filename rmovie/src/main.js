@@ -8,7 +8,7 @@ import 'bootstrap'; import 'bootstrap/dist/css/bootstrap.min.css';
 import VueCookies from 'vue-cookies'
 import cors from "cors"
 Vue.use(VueCookies, { expire: '15m'})
-Vue.prototype.$users = '' 
+Vue.prototype.$users = {user_name: "name"}
 Vue.prototype.$accessToken =""
 
 Vue.use(BootstrapVue)
