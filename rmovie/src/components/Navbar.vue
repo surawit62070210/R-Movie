@@ -15,7 +15,7 @@
               <a class="nav-link" href="/" style="margin-right: 15px" id="nav1">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/random" style="margin-right: 15px" id="nav1">Random Movie</a>
+              <a class="nav-link" href="/random1" style="margin-right: 15px" id="nav1">Random Movie</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about" id="nav1">About Us</a>
@@ -304,6 +304,7 @@ export default {
       //
     },
     checkLogin() {
+      if(this.$cookies.get("refresh_token") != null){
       axios
         .get(process.env.VUE_APP_HOST + "auth/refresh_token", {
           headers: {
@@ -320,7 +321,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        });
+        });}
     },
     logout() {
       this.auth = false;
@@ -331,7 +332,6 @@ export default {
   },
   created() {
     this.checkLogin();
-    console.log('nav')
   },
 };
 import DatePicker from "vue2-datepicker";
