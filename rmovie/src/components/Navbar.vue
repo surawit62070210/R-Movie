@@ -231,31 +231,32 @@ export default {
       this.email_check = !this.validateEmail(this.email) ? 'กรุณากรอก Email ให้ถูกต้อง' : null
       this.mobile_check = (((isNaN(this.mobile) && !(this.mobile.length == 10))) || isNaN(this.mobile) || this.mobile == '') ? 'กรุณากรอกเบอร์ให้ถูกต้อง' : null
       this.repassword_check = this.repassword == this.password ? null : "รหัสผ่านไม่ตรงกัน" 
-      
-      // axios
-      //   .post(process.env.VUE_APP_HOST + "users", {
-      //     user_name: this.username,
-      //     user_email: this.email,
-      //     user_password: this.password,
-      //     user_mobile: this.mobile,
-      //     user_firstname: this.first_name,
-      //     user_lastname: this.last_name,
-      //     user_birthday: this.date,
-      //   })
-      //   .then((res) => {
-      //     this.$accessToken = res.data.accessToken;
-      //     alert("สมัครสมาชิกสำเร็จ");
-      //     this.username = "";
-      //     this.email = "";
-      //     this.password = "";
-      //     this.mobile = "";
-      //     this.first_name = "";
-      //     this.last_name = "";
-      //     this.date = "";
-      //   })
-      //   .catch((error) => {
-      //     console.log(error.response.data);
-      //   });
+      if(this.username_check == null && this.email_check == null && this.first_name_check == null && this.last_name_check == null && this.password_check == null && this.date_check == null && this.email_check == null && this.mobile_check == null){
+      axios
+        .post(process.env.VUE_APP_HOST + "users", {
+          user_name: this.username,
+          user_email: this.email,
+          user_password: this.password,
+          user_mobile: this.mobile,
+          user_firstname: this.first_name,
+          user_lastname: this.last_name,
+          user_birthday: this.date,
+        })
+        .then((res) => {
+          this.$accessToken = res.data.accessToken;
+          alert("สมัครสมาชิกสำเร็จ");
+          this.username = "";
+          this.email = "";
+          this.password = "";
+          this.mobile = "";
+          this.first_name = "";
+          this.last_name = "";
+          this.date = "";
+          this.repassword = '';
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });}
     },
     login() {
       this.email_check = null
