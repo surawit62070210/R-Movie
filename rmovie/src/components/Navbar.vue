@@ -337,7 +337,6 @@ import "vue2-datepicker/index.css";
 .all {
   width: 100%;
 }
-
 body {
   padding: 0;
   margin: 0;
@@ -345,12 +344,10 @@ body {
   height: 100%;
   min-height: 100%;
 }
-
 #nav1:hover {
   font-weight: 600;
   color: white;
 }
-
 .active {
   font-size: 50%;
 }
