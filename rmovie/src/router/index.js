@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import random from '../views/Random-Page.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,7 +12,7 @@ const routes = [
     {
         path: '/random1',
         name: 'random movie',
-        component: () => import('../views/Random-Page.vue')
+        component: random
     },
     {
         path: '/about',
