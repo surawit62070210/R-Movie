@@ -7,7 +7,7 @@
         class="col" v-for="(movie, index) in movies.slice(0,15)"
         :key="index" 
       >
-        <div class="card" style="width: 15rem">
+        <div class="card" id="blog" style="width: 15rem">
           <img class="card-img-top" :src="movie.image1" alt="Card image cap" style="max-height: 300px" />
           <div class="card-body">
             <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{movie.title}}</h1>
@@ -28,14 +28,38 @@
       <div class="modal-body">
         <div class="row">
           <div class="col">
-            <img class="modal-image" :src="blog.image2" alt="Card image cap" style="max-height: 450px" />
+            <img class="modal-image" :src="blog.image2" alt="Card image cap" style="max-height: 350px;min-height: 350px;min-width: 650px;max-width:650px" />
+            <p>{{blog.crew}}</p>
+            <iframe width="650" height="350" :src="blog.trailer"></iframe>
+            <p>{{blog.title}} Trailer</p>
           </div>
           <div class="col">
             <h5 class="modal-title">{{blog.fullTitle}}</h5>
             <p>IMDb {{blog.imDbRating}}/10</p>
             <p>{{blog.crew}}</p>
             <p>{{blog.storyline}}</p>
-            <iframe width="420" height="345" :src="blog.trailer"></iframe>
+            <h5>User Comment</h5>
+        
+        <div class="card">
+          <div class="card-body">
+            
+            <p>Type your note, and hit enter to add it</p>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex flex-row align-items-center">
+                <img src="https://avatars.dicebear.com/api/big-ears/.svg" alt="avatar" width="25"
+                  height="25" />
+                <p class="small mb-0 ms-2">Mary Kate</p>
+              </div>
+              <div class="d-flex flex-row align-items-center text-primary">
+                <p>19:00</p>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+      
+
           </div>
         </div>
         
@@ -89,7 +113,7 @@ body {
   width: 100%;
   background-color: rgb(255, 255, 255);
 }
-.card:hover{
+#blog:hover{
  background-color: #ffe880;
 }
 </style>
