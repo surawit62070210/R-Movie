@@ -33,8 +33,9 @@
           </form>
         </nav>
         <!-- ไอเหื้ยจีน -->
-        <button type="button" v-if="auth">{{ this.$users.user_name }}</button>
-        <button @click="logout()" type="button" v-if="auth">Logout</button>
+        
+        <a class="nav-link navbar-light btn btn-outline-light" style="margin-right: 10px;" href="/user" v-if="auth">{{ this.$users.user_name }}</a>
+        <button @click="logout()" type="button" style="margin-right: 20px;" class="mr-2" v-if="auth">Logout</button>
         <!-- ไอเหื้ยจีน -->
         <button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal"
           data-bs-target="#loginModal" style="margin-right: 20px">
@@ -325,9 +326,7 @@ export default {
       this.$accessToken = "";
       this.$cookies.remove("refresh_token");
     },
-    isRequired(value) {
-      return value ? true : 'This field is required';
-    },
+
   },
   created() {
     this.checkLogin();
