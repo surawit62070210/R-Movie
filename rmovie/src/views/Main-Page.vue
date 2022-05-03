@@ -35,6 +35,7 @@
             <p>IMDb {{blog.imDbRating}}/10</p>
             <p>{{blog.crew}}</p>
             <p>{{blog.storyline}}</p>
+            <iframe width="420" height="345" :src="blog.trailer"></iframe>
           </div>
         </div>
         
@@ -86,7 +87,7 @@ export default {
 <style scoped>
 body {
   width: 100%;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
 }
 .card:hover{
  background-color: #ffe880;

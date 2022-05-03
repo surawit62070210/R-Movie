@@ -14,7 +14,7 @@
         "imDbRatingCount": "2571685",
         "Genre": ["Drama"],
         "tag": "test",
-        "trailer": "https://www.youtube.com/watch?v=P9mwtI82k6E"
+        "trailer": "https://www.youtube.com/embed/P9mwtI82k6E"
       },
       {
         "id": "tt0068646",
@@ -30,7 +30,7 @@
         "imDbRatingCount": "1770888",
         "Genre": ["Drama", "Crime"],
         "tag": "test",
-        "trailer": "https://www.youtube.com/watch?v=UaVTIH8mujA"
+        "trailer": "https://www.youtube.com/embed/UaVTIH8mujA"
       },
       {
         "id": "tt0468569",
@@ -46,7 +46,7 @@
         "imDbRatingCount": "2537782",
         "Genre": ["Action", "Crime", "Drama", "Thriller"],
         "tag": "test",
-        "trailer": "https://www.youtube.com/watch?v=EXeTwQWrcwY"
+        "trailer": "https://www.youtube.com/embed/EXeTwQWrcwY"
       },
       {
         "id": "tt0071562",
