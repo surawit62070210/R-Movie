@@ -225,6 +225,7 @@ export default {
   },
   logout() {
     this.auth = false
+    
     this.$cookies.remove('refresh_token')
   }
 }, created(){
