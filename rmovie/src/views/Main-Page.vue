@@ -32,7 +32,7 @@
           </div>
           <div class="col">
             <h5 class="modal-title">{{blog.fullTitle}}</h5>
-            <p>IMDb RATING {{blog.imDbRating}}/10</p>
+            <p>IMDb {{blog.imDbRating}}/10</p>
             <p>{{blog.crew}}</p>
             <p>{{blog.storyline}}</p>
           </div>
