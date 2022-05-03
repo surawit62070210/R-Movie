@@ -17,10 +17,12 @@ app.use(cors()); // ให้ app(express) ใช้งานการ cors modu
 const userRouter = require('./routes/user-routes');
 const authRouter = require('./routes/auth-routes');
 const dataRouter = require('./routes/data-routes')
+const commentRouter = require('./routes/comment-routes')
 app.use(cookieParser());
 app.use('/users', userRouter)
 app.use('/auth', authRouter)
 app.use('/get', dataRouter)
+app.use('/comment', commentRouter)
 const port = parseInt(process.env.PORT, 10) || 3000
 
 app.use(json());

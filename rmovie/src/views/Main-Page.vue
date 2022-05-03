@@ -48,6 +48,9 @@
 </div>
 
     </div>
+
+    
+
   </div>
   </body>
 </template>
@@ -83,7 +86,7 @@ export default {
 <style scoped>
 body {
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
 }
 .card:hover{
  background-color: #ffe880;
