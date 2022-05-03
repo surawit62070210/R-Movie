@@ -244,6 +244,8 @@ export default {
         })
         .then((res) => {
           this.$accessToken = res.data.accessToken;
+          this.$cookies.set("refresh_token", res.data.refreshToken);
+          this.checkLogin()
           alert("สมัครสมาชิกสำเร็จ");
           this.username = "";
           this.email = "";
@@ -255,7 +257,8 @@ export default {
           this.repassword = '';
         })
         .catch((error) => {
-          console.log(error.response.data);
+          alert(error.response.data.error);
+          console.log(error.response.data.error)
         });}
     },
     login() {
@@ -263,10 +266,10 @@ export default {
       this.password_check = null
       if (this.email == '') {
         this.email_check = 'กรุณากรอก Email'
-      } if (this.password == '') {
+      }if (this.password == '') {
         this.password_check = 'กรุณากรอก Password'
       }
-      else if (password_check == null && email_check == null) {
+      else if (this.password_check == null && this.email_check == null) {
         axios
           .post(process.env.VUE_APP_HOST + "auth/login", {
             email: this.email,
