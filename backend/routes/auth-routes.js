@@ -27,7 +27,6 @@ router.get('/refresh_token', (req, res) => {
       if (refreshToken === null) return res.sendStatus(401);
       jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
         if (error) return res.status(403).json({error:error.message});
-        console.log(user)
         res.json(jwtTokens(user.user_email, user.user_password, user.user_name, user.user_firstname, user.user_lastname, user.user_mobile, user.user_birthday));
       });
     } catch (error) {

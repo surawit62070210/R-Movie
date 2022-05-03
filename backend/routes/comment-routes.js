@@ -1,6 +1,6 @@
 const express = require('express');
 const client = require('../models/DbConfig');
-
+const { authenticateToken } = require('../middleware/authorization')
 const router = express.Router();
 
 router.get('/:movieID', async (req, res)=>{
@@ -8,7 +8,7 @@ router.get('/:movieID', async (req, res)=>{
     const comments = await client.query(`select * from comments where movie_id =  '${movieID}'`)
     res.json(comments.rows)
 })
-router.post('/create', async (req, res)=>{
+router.post('/create', authenticateToken , async (req, res)=>{
     const on_commit = req.body
     console.log(on_commit)
     try{ 
@@ -18,13 +18,21 @@ router.post('/create', async (req, res)=>{
         res.status(500).json(error)
     }
 })
-router.delete('/:comment_id', async (req, res)=>{
+router.delete('/:comment_id/:email', authenticateToken , async (req, res)=>{
     const comment_id = req.params.comment_id
+    const email = req.params.email
+    console.log(comment_id)
+    console.log(email)
     try{
-        await client.query(`delete from comments where comment_id = '${comment_id}'`)
-        res.status(200).send('ok')
+        let check = await client.query(`delete from comments where comment_id = '${comment_id}' and comment_by_email = '${email}'`)
+        if(check.rowCount == 0){
+            res.status(304).send('ไม่สามารถลบได้')
+        }else{
+            res.status(200).send('ลบสำเร็จ')
+        }
     }catch(error){
         res.status().json(error)
+        console.log(error)
     }
 })
 

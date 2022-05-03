@@ -10,7 +10,7 @@ const routes = [
         component: () => import('../views/Main-Page.vue')
     },
     {
-        path: '/random1',
+        path: '/random',
         name: 'random movie',
         component: () => import('../views/Random-Page.vue')
     },
