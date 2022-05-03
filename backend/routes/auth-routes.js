@@ -13,32 +13,14 @@ router.post('/login', async (req, res)=>{
         if(users.rows.length === 0) return res.status(401).json({error: 'Email is incorrect'});
         const validPassword = await bcrypt.compare(password, users.rows[0].user_password)
         if(!validPassword) res.status(401).json({error: "password is incorrect"})
-        let tokens = jwtTokens(users.rows[0].user_email, users.rows[0].user_password, users.rows[0].user_name);
+        let tokens = jwtTokens(users.rows[0].user_email, users.rows[0].user_password);
         res.cookie('refresh_token', tokens.refreshToken);
 
-        res.json({tokens:tokens, users:users[0]});
+        res.json(tokens);
     } catch(error){
         res.status(401).json({error:error.message})
     }
 })
-router.get('/refresh_token', (req, res) => {
-    try {
-        const authHeader = req.headers['authorization']
-        const refreshToken = authHeader && authHeader.split(' ')[1];
-      if (refreshToken === null) return res.sendStatus(401);
-      jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, user) => {
-        if (error) return res.status(403).json({error:error.message});
-        let tokens = jwtTokens(user);
-        res.cookie('refresh_token', tokens.refreshToken);
-        return res.json(tokens);
-      });
-    } catch (error) {
-      res.status(401).json({error: error.message});
-    }
-  });
-
-
-
 router.delete('/refresh_token', (req, res) => {
     try{
         const refresh =  req.cookies.refresh_token;

@@ -13,7 +13,8 @@ Vue.config.productionTip = false
 
 
 
-
+import VueCarousel from 'vue-carousel';
+Vue.use(VueCarousel);
 
 new Vue({
   router,
