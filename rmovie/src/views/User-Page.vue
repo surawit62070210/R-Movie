@@ -9,7 +9,7 @@
                             <template #header>
                                 <b-nav card-header tabs>
                                     <b-nav-item active>Profile</b-nav-item>
-                                    <b-nav-item v-if="false">Inactive</b-nav-item>
+                                    <b-nav-item v-if="true">Inactive</b-nav-item>
                                     <b-nav-item v-if="false" disabled>Disabled</b-nav-item>
                                 </b-nav>
                             </template>

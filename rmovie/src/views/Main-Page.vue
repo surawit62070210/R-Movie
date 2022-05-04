@@ -5,84 +5,88 @@
       <div class="row">
         <div class="mt-5">
           <h1 class="mb-4">All Movies</h1>
-        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
-          <slide class="col" v-for="(movie, index) in movies.slice(0, 15)" :key="index">
-            <div class="card" id="blog" style="width: 15rem">
-              <img class="card-img-top" :src="movie.image1" alt="Card image cap" style="max-height: 300px" />
-              <div class="card-body">
-                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">
-                  {{ movie.title }}
-                </h1>
-                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
-                  style="color: white; width: 100%" @click="getmovie(movie)">Watch</a>
+          <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+            <slide class="col" v-for="(movie, index) in movies.slice(0, 15)" :key="index">
+              <div class="card" id="blog" style="width: 15rem">
+                <img class="card-img-top" :src="movie.image1" alt="Card image cap" style="max-height: 300px" />
+                <div class="card-body">
+                  <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">
+                    {{ movie.title }}
+                  </h1>
+                  <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal"
+                    class="btn btn-warning" style="color: white; width: 100%" @click="getmovie(movie)">Watch</a>
+                </div>
               </div>
-            </div>
-          </slide>
-        </carousel>
+            </slide>
+          </carousel>
         </div>
 
         <div class="mt-5">
           <h1 class="mb-4">Popular</h1>
-        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
-          <slide class="col" v-for="(poppular, index) in poppulars" :key="index">
-            <div class="card" id="blog" style="width: 15rem">
-              <img class="card-img-top" :src="poppular.image1" alt="Card image cap" style="max-height: 300px" />
-              <div class="card-body">
-                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ poppular.title }}</h1>
-                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
-                  style="color: white; width: 100%" @click="getmovie(poppular)">Watch</a>
+          <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+            <slide class="col" v-for="(poppular, index) in poppulars" :key="index">
+              <div class="card" id="blog" style="width: 15rem">
+                <img class="card-img-top" :src="poppular.image1" alt="Card image cap" style="max-height: 300px" />
+                <div class="card-body">
+                  <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ poppular.title
+                  }}</h1>
+                  <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal"
+                    class="btn btn-warning" style="color: white; width: 100%" @click="getmovie(poppular)">Watch</a>
+                </div>
               </div>
-            </div>
-          </slide>
-        </carousel>
+            </slide>
+          </carousel>
         </div>
 
         <div class="mt-5 mb-5">
           <h1 class="mb-4">Drama</h1>
-        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
-          <slide class="col" v-for="(drama, index) in dramas" :key="index">
-            <div class="card" id="blog" style="width: 15rem">
-              <img class="card-img-top" :src="drama.image1" alt="Card image cap" style="max-height: 300px" />
-              <div class="card-body">
-                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ drama.title }}</h1>
-                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
-                  style="color: white; width: 100%" @click="getmovie(drama)">Watch</a>
+          <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+            <slide class="col" v-for="(drama, index) in dramas" :key="index">
+              <div class="card" id="blog" style="width: 15rem">
+                <img class="card-img-top" :src="drama.image1" alt="Card image cap" style="max-height: 300px" />
+                <div class="card-body">
+                  <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ drama.title }}
+                  </h1>
+                  <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal"
+                    class="btn btn-warning" style="color: white; width: 100%" @click="getmovie(drama)">Watch</a>
+                </div>
               </div>
-            </div>
-          </slide>
-        </carousel>
+            </slide>
+          </carousel>
         </div>
 
         <div class="mt-5 mb-5">
           <h1 class="mb-4">Crime</h1>
-        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
-          <slide class="col" v-for="(crime, index) in crimes" :key="index">
-            <div class="card" id="blog" style="width: 15rem">
-              <img class="card-img-top" :src="crime.image1" alt="Card image cap" style="max-height: 300px" />
-              <div class="card-body">
-                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ crime.title }}</h1>
-                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
-                  style="color: white; width: 100%" @click="getmovie(crime)">Watch</a>
+          <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+            <slide class="col" v-for="(crime, index) in crimes" :key="index">
+              <div class="card" id="blog" style="width: 15rem">
+                <img class="card-img-top" :src="crime.image1" alt="Card image cap" style="max-height: 300px" />
+                <div class="card-body">
+                  <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ crime.title }}
+                  </h1>
+                  <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal"
+                    class="btn btn-warning" style="color: white; width: 100%" @click="getmovie(crime)">Watch</a>
+                </div>
               </div>
-            </div>
-          </slide>
-        </carousel>
+            </slide>
+          </carousel>
         </div>
 
         <div class="mt-5 mb-5">
           <h1 class="mb-4">Action</h1>
-        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
-          <slide class="col" v-for="(action, index) in actions" :key="index">
-            <div class="card" id="blog" style="width: 15rem">
-              <img class="card-img-top" :src="action.image1" alt="Card image cap" style="max-height: 300px" />
-              <div class="card-body">
-                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ action.title }}</h1>
-                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
-                  style="color: white; width: 100%" @click="getmovie(action)">Watch</a>
+          <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+            <slide class="col" v-for="(action, index) in actions" :key="index">
+              <div class="card" id="blog" style="width: 15rem">
+                <img class="card-img-top" :src="action.image1" alt="Card image cap" style="max-height: 300px" />
+                <div class="card-body">
+                  <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ action.title }}
+                  </h1>
+                  <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal"
+                    class="btn btn-warning" style="color: white; width: 100%" @click="getmovie(action)">Watch</a>
+                </div>
               </div>
-            </div>
-          </slide>
-        </carousel>
+            </slide>
+          </carousel>
         </div>
 
         <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -112,7 +116,8 @@
                     <p>{{ blog.crew }}</p>
                     <p>{{ blog.storyline }}</p>
                     <h5>User Comment</h5>
-                    <b-input-group style="margin-bottom: 15px;" :prepend="user.user_name" class="mt-3">
+                    <b-input-group style="margin-bottom: 15px;" v-if="user.user_name != null" :prepend="user.user_name"
+                      class="mt-3">
                       <b-form-input v-model="comment"></b-form-input>
                       <b-input-group-append>
                         <b-button @click="addComment()" variant="outline-success">Comment</b-button>
@@ -121,7 +126,7 @@
 
                     <div class="card " style="margin-bottom: 10px;" v-for="(com, index) in comments" :key="index">
 
-                      <div class="card-body "  >
+                      <div class="card-body ">
                         <p>{{ com.comment }}</p>
                         <div class="d-flex justify-content-between">
                           <div class="d-flex flex-row align-items-center">
@@ -131,7 +136,7 @@
                             </h3>
                           </div>
                           <div class="d-flex flex-row align-items-center text-primary">
-                            <b-button variant="danger" @click="deleteComment(com)">X</b-button>
+                            <b-button variant="danger" v-if="com.comment_by_email == user.user_email" @click="deleteComment(com)">X</b-button>
                           </div>
                         </div>
                       </div>
@@ -169,12 +174,12 @@ export default {
       poppulars: [],
       dramas: [],
       crimes: [],
-      comment:"",
-      comments:[],
+      comment: "",
+      comments: [],
       actions: [],
       token: "",
       user: "",
-      name:"",
+      name: "",
     };
   },
   async created() {
@@ -189,7 +194,7 @@ export default {
     this.crimemovie()
     this.actionmovie()
 
-},
+  },
 
   updated() {
     if (this.$cookies.get('refresh_token') == null) {
@@ -203,12 +208,17 @@ export default {
     },
     addComment() {
       this.checkLogin();
-      console.log(this.token);
       if (this.comment == "") {
         alert("กรุณาพิมพ์ข้อความ");
         return;
       } else {
         this.user = jwtDecode(this.token)
+        if (this.$cookies.get('refresh_token') != null) {
+        this.user = jwtDecode(this.$cookies.get('refresh_token'))
+
+        }
+
+        console.log(this.user)
         if (this.token != null) {
           axios
             .post(
@@ -272,7 +282,7 @@ export default {
             if (res.status == 200) {
               this.token = res.data.accessToken;
               this.$cookies.set("refresh_token", res.data.refreshToken);
-              this.user = jwtDecode(res.data.accessToken);
+              this.user = jwtDecode(res.data.refreshToken);
               this.name = this.user.user_name;
             }
           })
@@ -295,55 +305,55 @@ export default {
       var token = this.$cookies.get('refresh_token')
       if (token != null) {
         this.user = jwtDecode(token)
-    }
+      }
     },
     tagmovie() {
       this.poppulars = this.movies.filter(movie => {
-       if ((parseInt(movie.imDbRatingCount)) > 1300000) {
-         return movie
-       }
+        if ((parseInt(movie.imDbRatingCount)) > 1300000) {
+          return movie
+        }
       })
     },
     dramamovie() {
-        this.movies.forEach(movie =>{
-          if(movie.Genre != undefined){
+      this.movies.forEach(movie => {
+        if (movie.Genre != undefined) {
 
-        (movie.Genre).forEach(element => {
-          if(element == 'Drama'){
-            this.dramas.push(movie)
-          }
-        });
-          }
-        })
+          (movie.Genre).forEach(element => {
+            if (element == 'Drama') {
+              this.dramas.push(movie)
+            }
+          });
+        }
+      })
       // console.log(this.dramas)
     },
     crimemovie() {
-        this.movies.forEach(movie =>{
-          if(movie.Genre != undefined){
+      this.movies.forEach(movie => {
+        if (movie.Genre != undefined) {
 
-        (movie.Genre).forEach(element => {
-          if(element == 'Crime'){
-            this.crimes.push(movie)
-          }
-        });
-          }
-        })
+          (movie.Genre).forEach(element => {
+            if (element == 'Crime') {
+              this.crimes.push(movie)
+            }
+          });
+        }
+      })
       // console.log(this.dramas)
     },
     actionmovie() {
-        this.movies.forEach(movie =>{
-          if(movie.Genre != undefined){
+      this.movies.forEach(movie => {
+        if (movie.Genre != undefined) {
 
-        (movie.Genre).forEach(element => {
-          if(element == 'Action'){
-            this.actions.push(movie)
-          }
-        });
-          }
-        })
+          (movie.Genre).forEach(element => {
+            if (element == 'Action') {
+              this.actions.push(movie)
+            }
+          });
+        }
+      })
       // console.log(this.dramas)
-    this.checkLogin()
-  },
+      this.checkLogin()
+    },
   },
 };
 </script>
