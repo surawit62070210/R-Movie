@@ -1,5 +1,111 @@
 <template>
-    <div>
-        <p>ควยนนท์</p>
-    </div>
+
+    <body>
+        <b-container>
+            <b-row>
+                <b-col>
+                    <div>
+                        <b-card title="Profile" body-class="text-center" header-tag="nav">
+                            <template #header>
+                                <b-nav card-header tabs>
+                                    <b-nav-item active>Profile</b-nav-item>
+                                    <b-nav-item v-if="false">Inactive</b-nav-item>
+                                    <b-nav-item v-if="false" disabled>Disabled</b-nav-item>
+                                </b-nav>
+                            </template>
+                            <template>
+                                <div>
+                                    <b-form @submit="onSubmit" v-if="true">
+
+
+                                        <b-form-group id="username" style="text-align: left; margin-bottom:2%; display:flex" label="Your username:   "
+                                            label-for="username"><span v-if="!edit" style="margin-left: 10px;">{{user.user_name}}</span>
+                                            <b-form-input v-if="edit" id="username" v-model="form.user_name"
+                                                placeholder="Enter username" required></b-form-input>
+                                        </b-form-group>
+
+
+                                        <b-form-group id="firstname" style="text-align: left; margin-bottom:2%; display:flex" label="Your firstname:"
+                                            label-for="firstname"><span v-if="!edit" style="margin-left: 10px;">{{user.user_firstname}}</span>
+                                            <b-form-input v-if="edit"  id="fistname" v-model="form.user_firstname"
+                                                placeholder="Enter Firstname" required></b-form-input>
+                                        </b-form-group>
+
+
+                                        <b-form-group id="Lastname" style="text-align: left; margin-bottom:2%; display:flex" label="Your fastname:"
+                                            label-for="Lastname"><span v-if="!edit" style="margin-left: 10px;">{{user.user_lastname}}</span>
+                                            <b-form-input v-if="edit"  id="Lastname" v-model="form.user_lastname"
+                                                placeholder="Enter fastname" required></b-form-input>
+                                        </b-form-group>
+
+                                        <b-form-group id="mobile" style="text-align: left; margin-bottom:2%; display:flex" label="Your mobile:"
+                                            label-for="mobile"><span v-if="!edit" style="margin-left: 10px;">{{user.user_mobile}}</span>
+                                            <b-form-input v-if="edit"  id="mobile" v-model="form.user_mobile"
+                                                placeholder="Enter Mobile" required></b-form-input>
+                                        </b-form-group>
+
+
+
+                                        <b-button type="submit" v-if="edit" style="margin-top:10px" variant="primary">Submit
+                                        </b-button>
+                                        <b-button type="reset" v-if="!edit" @click="edit = !edit" style="margin-top:10px" variant="warning">Edit</b-button>
+                                        <b-button type="reset" v-if="edit" @click="edit = !edit" style="margin-top:10px" variant="secondary">close</b-button>
+                                    </b-form>
+                                    <b-card class="mt-3" header="User Profile Avata">
+                                        <img v-if="edit" style="width:30%" :src="getAvata(form.user_name)">
+                                    </b-card>
+                                </div>
+                            </template>
+                        </b-card>
+                    </div>
+
+                </b-col>
+            </b-row>
+        </b-container>
+    </body>
+
 </template>
+
+<script>
+import axios from "axios";
+import { jwtDecode } from '@/components/jwt-decode';
+export default {
+    data() {
+        return {
+            form: {
+                user_mobile: "",
+                user_name: "",
+                user_firstname: "",
+                user_lastname: "",
+                user_email:"",
+
+            },
+            user: "",
+            edit: false
+
+        };
+    }, methods: {
+        onSubmit(event) {
+            event.preventDefault()
+            this.form.user_email = this.user.user_email
+            axios.post(process.env.VUE_APP_HOST + "users/update", this.form)
+
+            // alert(JSON.stringify(this.form))
+        },
+        getAvata(name) {
+      return "https://avatars.dicebear.com/api/big-ears/" + name + ".svg";
+    },
+        getUser(){
+            var token =this.$cookies.get("refresh_token");
+            if(token != null){
+                this.user = jwtDecode(token)
+            }
+        }
+
+    }, updated() {
+        console.log(this.form.user_firstname)
+    }, created(){
+        this.getUser()
+    }
+}
+</script>

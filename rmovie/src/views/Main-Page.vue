@@ -45,7 +45,7 @@
                     <p>{{ blog.crew }}</p>
                     <p>{{ blog.storyline }}</p>
                     <h5>User Comment</h5>
-                    <b-input-group style="margin-bottom: 15px;" :prepend="this.$users.user_name" class="mt-3">
+                    <b-input-group style="margin-bottom: 15px;" :prepend="name" class="mt-3">
                       <b-form-input v-model="comment"></b-form-input>
                       <b-input-group-append>
                         <b-button @click="addComment()" variant="outline-success">Comment</b-button>
@@ -58,7 +58,7 @@
                         <p>{{ com.comment }}</p>
                         <div class="d-flex justify-content-between">
                           <div class="d-flex flex-row align-items-center">
-                            <img :src="getAvata(com.comment_by_email)" alt="avatar" width="50" height="50" />
+                            <img :src="getAvata(name)" alt="avatar" width="50" height="50" />
                             <h3 class="small mb-0 ms-2">
                               {{ com.comment_by_email }}
                             </h3>
@@ -103,6 +103,7 @@ export default {
       comments: [],
       token: "",
       user: "",
+      name:"",
     };
   },
   async created() {
@@ -119,6 +120,7 @@ export default {
     this.checkLogin()
     if (this.$cookies.get('refresh_token') == null) {
       this.token = null
+      this.user = null
     }
   },
   methods: {
@@ -196,6 +198,7 @@ export default {
               this.token = res.data.accessToken;
               this.$cookies.set("refresh_token", res.data.refreshToken);
               this.user = jwtDecode(res.data.accessToken);
+              this.name = this.user.user_name;
             }
           })
           .catch((error) => {
