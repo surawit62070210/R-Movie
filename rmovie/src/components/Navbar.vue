@@ -34,12 +34,13 @@
         </nav>
         <!-- ไอเหื้ยจีน -->
         
-        <a class="nav-link navbar-light btn btn-outline-light" style="margin-right: 10px;" href="/user" v-if="auth">{{ this.$users.user_name }}</a>
-        <button @click="logout()" type="button" style="margin-right: 20px;" class="mr-2" v-if="auth">Logout</button>
+        <a class="btn btn-primary" style="margin-right: 10px;" href="/user" v-if="auth">{{ this.$users.user_name }}</a>
+        <button @click="logout()" type="button" style="margin-right: 20px;" class="btn btn-danger" v-if="auth">Logout</button>
+
         <!-- ไอเหื้ยจีน -->
         <button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal"
           data-bs-target="#loginModal" style="margin-right: 20px">
-          Login
+          LOGIN
         </button>
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" style="max-width: 350px">
@@ -76,7 +77,7 @@
               <div class="modal-footer justify-content-center">
                 <div class="signup-section">
                   Not a member yet?
-                  <a href="#exampleModal" class="text-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign
+                  <a href="#signup" class="text-info" data-bs-toggle="modal" data-bs-target="#signup">Sign
                     Up</a>.
                 </div>
               </div>
@@ -84,10 +85,10 @@
           </div>
         </div>
 
-        <button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signup"
+        <!-- <button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#signup"
           style="margin-right: 20px">
           Sign Up
-        </button>
+        </button> -->
 
         <div class="modal fade" ref="signup" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel2"
           aria-hidden="true">
@@ -175,7 +176,7 @@
               <div class="modal-footer justify-content-center">
                 <div class="signup-section">
                   Already a member?
-                  <a href="#exampleModal" class="text-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign
+                  <a href="#loginModal" class="text-info" data-bs-toggle="modal" data-bs-target="#loginModal">Sign
                     in</a>.
                 </div>
               </div>
