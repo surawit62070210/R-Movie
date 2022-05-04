@@ -15,7 +15,7 @@
               <a class="nav-link" href="/" style="margin-right: 15px" id="nav1">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/random1" style="margin-right: 15px" id="nav1">Random Movie</a>
+              <a class="nav-link" href="/random" style="margin-right: 15px" id="nav1">Random Movie</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about" id="nav1">About Us</a>

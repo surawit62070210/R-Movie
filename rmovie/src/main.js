@@ -10,6 +10,8 @@ Vue.use(VueCookies, { expire: '15m'})
 Vue.prototype.$users = {user_name: "name"}
 Vue.prototype.$accessToken =""
 
+
+
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 

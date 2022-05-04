@@ -1,22 +1,8 @@
 <template>
-
   <body>
-    <div class="container">
-      <div class="row">
-        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
-          <slide class="col" v-for="(movie, index) in movies.slice(0, 15)" :key="index">
-            <div class="card" id="blog" style="width: 15rem">
-              <img class="card-img-top" :src="movie.image1" alt="Card image cap" style="max-height: 300px" />
-              <div class="card-body">
-                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ movie.title }}</h1>
-                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
-                  style="color: white; width: 100%" @click="getmovie(movie)">Watch</a>
-              </div>
-            </div>
-          </slide>
-        </carousel>
+ <div class="check">
 
-        <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-xl" style="max-width: 75%">
             <div class="modal-content">
               <div class="modal-header">
@@ -58,16 +44,11 @@
                           <div class="d-flex flex-row align-items-center text-primary">
                             <p>{{com.created_on}}</p>
                           </div>
-
                         </div>
                       </div>
                     </div>
-
-
-
                   </div>
                 </div>
-
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -77,11 +58,25 @@
           </div>
         </div>
 
-      </div>
 
-
-
-    </div>
+    <div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Drama" v-model="random">
+  <label class="form-check-label" for="inlineCheckbox1">Drama</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Action" v-model="random">
+  <label class="form-check-label" for="inlineCheckbox2">Action</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Crime" v-model="random">
+  <label class="form-check-label" for="inlineCheckbox2">Crime</label>
+</div>
+<div>
+  <span style="color: white">Checked names: {{ randommovies.length }}</span>
+  <a  class="btn btn-warning" href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal"
+    style="color: white; width: 100%"  @click="randommovie()">RANDOM MOVIE</a>
+</div>
+</div>
   </body>
 </template>
 
@@ -93,18 +88,27 @@ export default {
     return {
       movies: [],
       blog: "",
+      poppulars: [],
+      dramas: [],
+      crimes: [],
       comment:"",
       comments:[],
+      actions: [],
+      random: [],
+      randommovies: []
     };
   },
   async created() {
     try {
       const res = await axios.get(process.env.VUE_APP_HOST + 'get');
-
       this.movies = res.data;
     } catch (e) {
       console.error(e);
     }
+    this.tagmovie()
+    this.dramamovie()
+    this.crimemovie()
+    this.actionmovie()
 },
   methods: {
     getAvata(name){
@@ -141,6 +145,71 @@ export default {
       this.blog = movie
       this.getComments()
 
+    },
+    tagmovie() {
+      this.poppulars = this.movies.filter(movie => {
+       if ((parseInt(movie.imDbRatingCount)) > 1300000) {
+         return movie
+       }
+      })
+    },
+    dramamovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Drama'){
+            this.dramas.push(movie)
+          }
+        });
+          }
+        })
+      console.log(this.randommovies)
+    },
+    crimemovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Crime'){
+            this.crimes.push(movie)
+          }
+        });
+          }
+        })
+      // console.log(this.dramas)
+    },
+    actionmovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Action'){
+            this.actions.push(movie)
+          }
+        });
+          }
+        })
+      // console.log(this.dramas)
+    },
+    randommovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          this.random.forEach(ran => {
+            if(element == ran){
+              this.randommovies.push(movie)
+            }
+          })
+        });
+          }
+        })
+      // console.log(this.dramas)
+      this.blog = this.randommovies[Math.floor(Math.random() * this.randommovies.length)]
+      this.comment = ''
+      this.getComments()
+      this.randommovies = []
     }
   }
 };
@@ -148,11 +217,24 @@ export default {
 
 <style scoped>
 body {
-  width: 100%;
-  background-color: rgb(255, 255, 255);
-}
+  background: url("thumb-1920-414434.jpg") no-repeat center center fixed; 
+  background-size: cover;
+  height: 100vh;
+ }
+ .check {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ .form-check-label {
+   color: white;
+   font-size: 25px;
+   margin-left: 10px;
+ }
+ .form-check-input {
+   width: 30px;
+   height: 30px;
+ }
 
-#blog:hover {
-  background-color: #ffe880;
-}
 </style>

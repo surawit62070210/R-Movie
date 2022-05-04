@@ -3,6 +3,8 @@
   <body>
     <div class="container">
       <div class="row">
+        <div class="mt-5">
+          <h1 class="mb-4">All Movies</h1>
         <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
           <slide class="col" v-for="(movie, index) in movies.slice(0, 15)" :key="index">
             <div class="card" id="blog" style="width: 15rem">
@@ -15,6 +17,71 @@
             </div>
           </slide>
         </carousel>
+        </div>
+
+        <div class="mt-5">
+          <h1 class="mb-4">Popular</h1>
+        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+          <slide class="col" v-for="(poppular, index) in poppulars" :key="index">
+            <div class="card" id="blog" style="width: 15rem">
+              <img class="card-img-top" :src="poppular.image1" alt="Card image cap" style="max-height: 300px" />
+              <div class="card-body">
+                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ poppular.title }}</h1>
+                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
+                  style="color: white; width: 100%" @click="getmovie(poppular)">Watch</a>
+              </div>
+            </div>
+          </slide>
+        </carousel>
+        </div>
+
+        <div class="mt-5 mb-5">
+          <h1 class="mb-4">Drama</h1>
+        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+          <slide class="col" v-for="(drama, index) in dramas" :key="index">
+            <div class="card" id="blog" style="width: 15rem">
+              <img class="card-img-top" :src="drama.image1" alt="Card image cap" style="max-height: 300px" />
+              <div class="card-body">
+                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ drama.title }}</h1>
+                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
+                  style="color: white; width: 100%" @click="getmovie(drama)">Watch</a>
+              </div>
+            </div>
+          </slide>
+        </carousel>
+        </div>
+
+        <div class="mt-5 mb-5">
+          <h1 class="mb-4">Crime</h1>
+        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+          <slide class="col" v-for="(crime, index) in crimes" :key="index">
+            <div class="card" id="blog" style="width: 15rem">
+              <img class="card-img-top" :src="crime.image1" alt="Card image cap" style="max-height: 300px" />
+              <div class="card-body">
+                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ crime.title }}</h1>
+                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
+                  style="color: white; width: 100%" @click="getmovie(crime)">Watch</a>
+              </div>
+            </div>
+          </slide>
+        </carousel>
+        </div>
+
+        <div class="mt-5 mb-5">
+          <h1 class="mb-4">Action</h1>
+        <carousel :per-page="5" :autoplay="false" :loop="true" :autoplayHoverPause="true">
+          <slide class="col" v-for="(action, index) in actions" :key="index">
+            <div class="card" id="blog" style="width: 15rem">
+              <img class="card-img-top" :src="action.image1" alt="Card image cap" style="max-height: 300px" />
+              <div class="card-body">
+                <h1 class="card-title" style="font-size: 17px; font-weight: 600; min-height: 40px">{{ action.title }}</h1>
+                <a href="#exampleModal5" data-bs-target="#exampleModal5" data-bs-toggle="modal" class="btn btn-warning"
+                  style="color: white; width: 100%" @click="getmovie(action)">Watch</a>
+              </div>
+            </div>
+          </slide>
+        </carousel>
+        </div>
 
         <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-xl" style="max-width: 75%">
@@ -58,16 +125,11 @@
                           <div class="d-flex flex-row align-items-center text-primary">
                             <p>{{com.created_on}}</p>
                           </div>
-
                         </div>
                       </div>
                     </div>
-
-
-
                   </div>
                 </div>
-
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -76,11 +138,7 @@
             </div>
           </div>
         </div>
-
       </div>
-
-
-
     </div>
   </body>
 </template>
@@ -93,18 +151,25 @@ export default {
     return {
       movies: [],
       blog: "",
+      poppulars: [],
+      dramas: [],
+      crimes: [],
       comment:"",
       comments:[],
+      actions: []
     };
   },
   async created() {
     try {
       const res = await axios.get(process.env.VUE_APP_HOST + 'get');
-
       this.movies = res.data;
     } catch (e) {
       console.error(e);
     }
+    this.tagmovie()
+    this.dramamovie()
+    this.crimemovie()
+    this.actionmovie()
 },
   methods: {
     getAvata(name){
@@ -141,6 +206,52 @@ export default {
       this.blog = movie
       this.getComments()
 
+    },
+    tagmovie() {
+      this.poppulars = this.movies.filter(movie => {
+       if ((parseInt(movie.imDbRatingCount)) > 1300000) {
+         return movie
+       }
+      })
+    },
+    dramamovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Drama'){
+            this.dramas.push(movie)
+          }
+        });
+          }
+        })
+      // console.log(this.dramas)
+    },
+    crimemovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Crime'){
+            this.crimes.push(movie)
+          }
+        });
+          }
+        })
+      // console.log(this.dramas)
+    },
+    actionmovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Action'){
+            this.actions.push(movie)
+          }
+        });
+          }
+        })
+      // console.log(this.dramas)
     }
   }
 };
@@ -149,10 +260,15 @@ export default {
 <style scoped>
 body {
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
 }
 
 #blog:hover {
   background-color: #ffe880;
+}
+
+.mb-4 {
+  text-align: left;
+  color: white;
 }
 </style>
