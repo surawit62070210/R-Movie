@@ -189,89 +189,7 @@ export default {
     this.crimemovie()
     this.actionmovie()
 },
-  methods: {
-    getAvata(name){
-      return "https://avatars.dicebear.com/api/big-ears/"+name+".svg"
-    },
-    addComment(){
-      if(this.comment == ''){
-        alert("กรุณาพิมพ์ข้อความ")
-        return
-      }else{
-        axios.post(process.env.VUE_APP_HOST+"comment/create", {
-          movieId : this.blog.id,
-          comment_by_email: this.$users.user_email,
-          comment: this.comment
-        }).then((res) =>{
-          if(res){
-            this.getComments()
-            alert('บันทึกข้อความสำเร็จ')
-          }
-        }).catch((error) =>{
-          alert(error)
-          console.log(error)
-        })
-      }
-      console.log(this.$users)
-    },
-    getComments(){
-      axios.get(process.env.VUE_APP_HOST+`comment/${this.blog.id}`).then((res) =>{
-        this.comments = res.data
-      }).catch((error) => console.log(error))
-    },
-    getmovie(movie) {
-      this.comment = ''
-      this.blog = movie
-      this.getComments()
 
-    },
-    tagmovie() {
-      this.poppulars = this.movies.filter(movie => {
-       if ((parseInt(movie.imDbRatingCount)) > 1300000) {
-         return movie
-       }
-      })
-    },
-    dramamovie() {
-        this.movies.forEach(movie =>{
-          if(movie.Genre != undefined){
-
-        (movie.Genre).forEach(element => {
-          if(element == 'Drama'){
-            this.dramas.push(movie)
-          }
-        });
-          }
-        })
-      // console.log(this.dramas)
-    },
-    crimemovie() {
-        this.movies.forEach(movie =>{
-          if(movie.Genre != undefined){
-
-        (movie.Genre).forEach(element => {
-          if(element == 'Crime'){
-            this.crimes.push(movie)
-          }
-        });
-          }
-        })
-      // console.log(this.dramas)
-    },
-    actionmovie() {
-        this.movies.forEach(movie =>{
-          if(movie.Genre != undefined){
-
-        (movie.Genre).forEach(element => {
-          if(element == 'Action'){
-            this.actions.push(movie)
-          }
-        });
-          }
-        })
-      // console.log(this.dramas)
-    this.checkLogin()
-  },
   updated() {
     this.checkLogin()
     if (this.$cookies.get('refresh_token') == null) {
@@ -373,7 +291,53 @@ export default {
       this.comment = "";
       this.blog = movie;
       this.getComments();
+    },    tagmovie() {
+      this.poppulars = this.movies.filter(movie => {
+       if ((parseInt(movie.imDbRatingCount)) > 1300000) {
+         return movie
+       }
+      })
     },
+    dramamovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Drama'){
+            this.dramas.push(movie)
+          }
+        });
+          }
+        })
+      // console.log(this.dramas)
+    },
+    crimemovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Crime'){
+            this.crimes.push(movie)
+          }
+        });
+          }
+        })
+      // console.log(this.dramas)
+    },
+    actionmovie() {
+        this.movies.forEach(movie =>{
+          if(movie.Genre != undefined){
+
+        (movie.Genre).forEach(element => {
+          if(element == 'Action'){
+            this.actions.push(movie)
+          }
+        });
+          }
+        })
+      // console.log(this.dramas)
+    this.checkLogin()
+  },
   },
 };
 </script>
