@@ -34,9 +34,10 @@
         </nav>
         <!-- ไอเหื้ยจีน -->
         
-        <router-link class="nav-link navbar-light btn btn-outline-light" style="margin-right: 10px;" to="/user" v-if="auth">{{ this.$users.user_name }}</router-link>
-        <button @click="logout()" type="button" style="margin-right: 20px;" class="mr-2" v-if="auth">Logout</button>
+        <router-link class="btn btn-primary" style="margin-right: 10px;" to="/user" v-if="auth">{{ this.$users.user_name }}</router-link>
+        <button @click="logout()" type="button" style="margin-right: 20px;" class="btn btn-danger" v-if="auth">Logout</button>
         <!-- ไอเหื้ยจีน -->
+        
         <button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal"
           data-bs-target="#loginModal" style="margin-right: 20px">
           LOGIN
