@@ -15,7 +15,7 @@
                             </template>
                             <template>
                                 <div>
-                                    <b-form @submit="onSubmit" v-if="true">
+                                    <b-form @submit="onSubmit" @reset="onReset" v-if="true" >
 
 
                                         <b-form-group id="username" style="text-align: left; margin-bottom:2%; display:flex" label="Your username:   "
@@ -46,13 +46,13 @@
 
 
 
-                                        <b-button type="submit" v-if="edit" style="margin-top:10px" variant="primary">Submit
+                                        <b-button type="submit"   v-if="edit" style="margin-top:10px" variant="primary">Submit
                                         </b-button>
-                                        <b-button type="reset" v-if="!edit" @click="edit = !edit" style="margin-top:10px" variant="warning">Edit</b-button>
-                                        <b-button type="reset" v-if="edit" @click="edit = !edit" style="margin-top:10px" variant="secondary">close</b-button>
+                                        <b-button type="reset" v-if="!edit"  style="margin-top:10px" variant="warning">Edit</b-button>
+                                        <b-button type="reset" v-if="edit" style="margin-top:10px; margin-left:15px" variant="secondary">close</b-button>
                                     </b-form>
                                     <b-card class="mt-3" header="User Profile Avata">
-                                        <img v-if="edit" style="width:30%" :src="getAvata(form.user_name)">
+                                        <img v-if="edit || user != ''" style="width:30%" :src="getAvata(form.user_name)">
                                     </b-card>
                                 </div>
                             </template>
@@ -85,10 +85,27 @@ export default {
 
         };
     }, methods: {
+
+        onReset(event){
+            event.preventDefault()
+            this.edit = !this.edit
+        },
         onSubmit(event) {
             event.preventDefault()
             this.form.user_email = this.user.user_email
-            axios.post(process.env.VUE_APP_HOST + "users/update", this.form)
+            console.log("----")
+
+            axios.post(process.env.VUE_APP_HOST + "users/update", this.form).then((res) =>{
+                this.$cookies.set("refresh_token", res.data.refreshToken);
+                this.users = jwtDecode(res.data.accessToken);
+                alert("เรียบร้อย")
+                this.edit = false
+                this.getUser()
+            }  
+            
+            ).catch((error) =>{
+                console.log(error)
+            })
 
             // alert(JSON.stringify(this.form))
         },
@@ -103,9 +120,13 @@ export default {
         }
 
     }, updated() {
-        console.log(this.form.user_firstname)
+        this.form
     }, created(){
         this.getUser()
+        this.form.user_firstname = this.user.user_firstname
+        this.form.user_lastname = this.user.user_lastname
+        this.form.user_name = this.user.user_name
+        this.form.user_mobile = this.user.user_mobile
     }
 }
 </script>

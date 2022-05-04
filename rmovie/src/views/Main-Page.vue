@@ -188,6 +188,7 @@ export default {
     this.dramamovie()
     this.crimemovie()
     this.actionmovie()
+    console.log(this.movies)
 },
 
   updated() {
@@ -291,7 +292,8 @@ export default {
       this.comment = "";
       this.blog = movie;
       this.getComments();
-    },    tagmovie() {
+    },
+    tagmovie() {
       this.poppulars = this.movies.filter(movie => {
        if ((parseInt(movie.imDbRatingCount)) > 1300000) {
          return movie
