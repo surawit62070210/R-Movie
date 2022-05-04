@@ -112,7 +112,7 @@
                     <p>{{ blog.crew }}</p>
                     <p>{{ blog.storyline }}</p>
                     <h5>User Comment</h5>
-                    <b-input-group style="margin-bottom: 15px;" :prepend="name" class="mt-3">
+                    <b-input-group style="margin-bottom: 15px;" :prepend="user.user_name" class="mt-3">
                       <b-form-input v-model="comment"></b-form-input>
                       <b-input-group-append>
                         <b-button @click="addComment()" variant="outline-success">Comment</b-button>
@@ -125,7 +125,7 @@
                         <p>{{ com.comment }}</p>
                         <div class="d-flex justify-content-between">
                           <div class="d-flex flex-row align-items-center">
-                            <img :src="getAvata(name)" alt="avatar" width="50" height="50" />
+                            <img :src="getAvata(com.user_name)" alt="avatar" width="50" height="50" />
                             <h3 class="small mb-0 ms-2">
                               {{ com.comment_by_email }}
                             </h3>
@@ -188,11 +188,10 @@ export default {
     this.dramamovie()
     this.crimemovie()
     this.actionmovie()
-    console.log(this.movies)
+
 },
 
   updated() {
-    this.checkLogin()
     if (this.$cookies.get('refresh_token') == null) {
       this.token = null
       this.user = null
@@ -203,8 +202,8 @@ export default {
       return "https://avatars.dicebear.com/api/big-ears/" + name + ".svg";
     },
     addComment() {
+      this.checkLogin();
       console.log(this.token);
-
       if (this.comment == "") {
         alert("กรุณาพิมพ์ข้อความ");
         return;
@@ -218,6 +217,7 @@ export default {
                 movieId: this.blog.id,
                 comment_by_email: this.user.user_email,
                 comment: this.comment,
+                user_name: this.user.user_name
               },
               {
                 headers: {
@@ -292,6 +292,10 @@ export default {
       this.comment = "";
       this.blog = movie;
       this.getComments();
+      var token = this.$cookies.get('refresh_token')
+      if (token != null) {
+        this.user = jwtDecode(token)
+    }
     },
     tagmovie() {
       this.poppulars = this.movies.filter(movie => {

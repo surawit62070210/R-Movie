@@ -248,6 +248,7 @@ export default {
           this.$cookies.set("refresh_token", res.data.refreshToken);
           this.checkLogin()
           alert("สมัครสมาชิกสำเร็จ");
+          
           this.username = "";
           this.email = "";
           this.password = "";
@@ -272,6 +273,8 @@ export default {
         this.password_check = 'กรุณากรอก Password'
       }
       else if (this.password_check == null && this.email_check == null) {
+            console.log("======== login")
+
         axios
           .post(process.env.VUE_APP_HOST + "auth/login", {
             email: this.email,
@@ -287,6 +290,7 @@ export default {
             alert("ล็อคอินสำเร็จ");
             this.auth = true;
           }).catch((error) => {
+            console.log("error login")
             console.log(error)
             this.password = '';
             alert("Email หรือ รหัสผ่านไม่ถูกต้อง")
