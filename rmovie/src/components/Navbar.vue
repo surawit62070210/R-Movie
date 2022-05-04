@@ -12,13 +12,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="nav navbar-nav" style="font-size: 17px; margin-left: 20px">
             <li class="nav-item">
-              <a class="nav-link" href="/" style="margin-right: 15px" id="nav1">Home</a>
+              <router-link class="nav-link" to="/" style="margin-right: 15px" id="nav1">Home</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/random" style="margin-right: 15px" id="nav1">Random Movie</a>
+              <router-link class="nav-link" to="/random" style="margin-right: 15px" id="nav1">Random Movie</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/about" id="nav1">About Us</a>
+              <router-link class="nav-link" to="/about" id="nav1">About Us</router-link>
             </li>
           </ul>
         </div>
@@ -34,9 +34,8 @@
         </nav>
         <!-- ไอเหื้ยจีน -->
         
-        <a class="btn btn-primary" style="margin-right: 10px;" href="/user" v-if="auth">{{ this.$users.user_name }}</a>
-        <button @click="logout()" type="button" style="margin-right: 20px;" class="btn btn-danger" v-if="auth">Logout</button>
-
+        <router-link class="nav-link navbar-light btn btn-outline-light" style="margin-right: 10px;" to="/user" v-if="auth">{{ this.$users.user_name }}</router-link>
+        <button @click="logout()" type="button" style="margin-right: 20px;" class="mr-2" v-if="auth">Logout</button>
         <!-- ไอเหื้ยจีน -->
         <button type="button" v-if="!auth" class="btn btn-outline-light" data-bs-toggle="modal"
           data-bs-target="#loginModal" style="margin-right: 20px">
@@ -249,6 +248,7 @@ export default {
           this.$cookies.set("refresh_token", res.data.refreshToken);
           this.checkLogin()
           alert("สมัครสมาชิกสำเร็จ");
+          
           this.username = "";
           this.email = "";
           this.password = "";
@@ -273,6 +273,8 @@ export default {
         this.password_check = 'กรุณากรอก Password'
       }
       else if (this.password_check == null && this.email_check == null) {
+            console.log("======== login")
+
         axios
           .post(process.env.VUE_APP_HOST + "auth/login", {
             email: this.email,
@@ -288,6 +290,7 @@ export default {
             alert("ล็อคอินสำเร็จ");
             this.auth = true;
           }).catch((error) => {
+            console.log("error login")
             console.log(error)
             this.password = '';
             alert("Email หรือ รหัสผ่านไม่ถูกต้อง")

@@ -10,12 +10,13 @@ router.get('/:movieID', async (req, res)=>{
 })
 router.post('/create', authenticateToken , async (req, res)=>{
     const on_commit = req.body
-    console.log(on_commit)
+    console.log(on_commit.user_name)
     try{ 
-    await client.query(`insert into comments (movie_id, comment_by_email, comment) values ($1,$2,$3)`,[on_commit.movieId, on_commit.comment_by_email, on_commit.comment])
+    await client.query(`insert into comments (movie_id, comment_by_email, comment, user_name) values ($1,$2,$3, $4)`,[on_commit.movieId, on_commit.comment_by_email, on_commit.comment, on_commit.user_name])
     res.status(200).send('ok')
     }catch(error){
         res.status(500).json(error)
+        console.log(error)
     }
 })
 router.delete('/:comment_id/:email', authenticateToken , async (req, res)=>{

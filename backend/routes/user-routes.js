@@ -47,7 +47,26 @@ router.post("/", async (req, res) => {
   }
 });
 router.post("/update", async (req, res) => {
-    console.log(req.body)
+    user = req.body 
+    try{
+    let query = await client.query(`UPDATE users set user_mobile = '${req.body.user_mobile}', user_name = '${req.body.user_name}', user_firstname = '${req.body.user_firstname}', user_lastname = '${req.body.user_lastname}' where user_email = '${req.body.user_email}'`)
+    console.log(query.rowCount)
+    if(1 > 0){
+        try{
+        const users = await client.query(`select * from users where user_email = '${user.user_email}'`)
+        console.log(users.rows)
+        let tokens = jwtTokens(users.rows[0].user_email, users.rows[0].user_password, users.rows[0].user_name, users.rows[0].user_firstname, users.rows[0].user_lastname, users.rows[0].user_mobile, users.rows[0].user_birthday);
+        res.status(200).json(tokens)}
+        catch(error){
+            console.log(error)
+        }
+    }
+
+
+}catch(error){
+        res.status(404).json(error)
+        console.log(error)
+    }
 });
 
 router.delete("/", async (req, res) => {
